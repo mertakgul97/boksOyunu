@@ -1,0 +1,12 @@
+package boksMaci;
+
+public class Main {
+
+	public static void main(String[] args) {
+		Fighter attacker=new Fighter("Mert",20,100,80,50);
+		Fighter enemy=new Fighter("Ali",10,100,90,50);
+		Match match=new Match(attacker,enemy,75,95);
+		match.run();
+	}
+
+}
