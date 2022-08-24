@@ -1,0 +1,39 @@
+package boksMaci;
+
+public class Fighter {
+	String name;
+	int damage;
+	int health;
+	int weight;
+	double dodge;
+	
+	public Fighter(String name, int damage, int health, int weight,double dodge) {
+		
+		this.name = name;
+		this.damage = damage;
+		this.health = health;
+		this.weight = weight;
+		this.dodge=dodge;
+	}
+	
+	int hit(Fighter enemy) {
+		
+		System.out.println(this.name + " oyuncusu " + enemy.name + " oyuncusuna "+this.damage+" hasar verdi");
+	      if (enemy.dodge()) {
+	            System.out.println(enemy.name + " gelen hasarı savurdu.");
+	            return enemy.health;
+	        }
+		
+		if(this.health-this.damage<0) {
+			return 0;
+		}
+		
+		
+		return enemy.health-this.damage;
+	}
+	 public boolean dodge() {
+	        double randomValue = Math.random() * 100;  //0.0 to 99.9
+	        return randomValue <= this.dodge;
+	    }
+
+}
