@@ -1,0 +1,82 @@
+package boksMaci;
+
+public class Match {
+	Fighter f1;
+	Fighter f2;
+	int minWeight;
+	int maxWeight;
+	public Match(Fighter f1, Fighter f2, int minWeight, int maxWeight) {
+		
+		this.f1 = f1;
+		this.f2 = f2;
+		this.minWeight = minWeight;
+		this.maxWeight = maxWeight;
+	}
+
+	void run() {
+		System.out.println(f1.name+ " VS " + f2.name);
+		int i=1;
+		int chance = Math.round((float)Math.random());
+		
+		if(chance==0) {
+			System.out.println("Oyuna "+ f1.name + " başlıyor");
+		}
+		else if(chance==1) {
+			System.out.println("Oyuna "+ f2.name + " başlıyor");
+		}
+		if(checkWeight()) {
+			while(f1.health>0 && f2.health>0) {
+				System.out.println("======="+ i++ +".Round=======");
+				if(chance==0) {
+					f2.health=f1.hit(this.f2);
+				if(isWin()) {
+					break;
+				}
+				
+				f1.health = f2.hit(this.f1);
+				if(isWin()) {
+					break;
+				}
+				if (chance==1) {
+					f1.health=f2.hit(this.f1);
+					if(isWin()) {
+						break;
+					}
+					f2.health=f1.hit(this.f2);
+					if(isWin()) {
+						break;
+					}
+				}
+				}
+				
+				printScore();
+			}
+			
+		}
+		else {
+			System.out.println("Boksörlerin sikletleri uymuyor");
+		}
+	}
+	
+	
+	boolean checkWeight() {
+		return ((f1.weight < maxWeight && f1.weight>minWeight) && (f2.weight < maxWeight && f2.weight>minWeight));
+	}
+	boolean isWin() {
+		if(f2.health<=0) {
+			System.out.println(f1.name+" oyuncusu kazandı");
+			return true;
+		}
+		else if(f1.health<=0) {
+			System.out.println(f2.name+" oyuncusu kazandı");
+			return true;
+		}
+		
+		return false;
+	}
+	void printScore() {
+		System.out.println(f1.name+ " oyuncusunun kalan sağlığı: " +f1.health);
+		System.out.println(f2.name+ " oyuncusunun kalan sağlığı: " +f2.health);
+		System.out.println("----------------------------");
+	}
+}
